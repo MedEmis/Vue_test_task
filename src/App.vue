@@ -1,28 +1,96 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="main-container">
+      <header class="main-container__header">
+        <router-link
+          class="main-container__header_route-link"
+          to="/post-preView"
+          >Posts List</router-link
+        >
+        <span>post# {{ GET_INFINITE_POSTS.length }}</span>
+      </header>
+      <main class="main-container__сontent">
+        <transition name="fade" mode="out-in">
+          <router-view />
+        </transition>
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { mapGetters } from "vuex";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: {},
+  computed: mapGetters(["GET_INFINITE_POSTS"]),
+};
 </script>
 
-<style>
+<style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background: rgb(202, 202, 202);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.main-container {
+  display: block;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  background: $main-bg;
+
+  &__header {
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    padding: 15px;
+    z-index: 15;
+    background: $header-bg;
+    &_route-link {
+      padding: 10px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 700;
+      border-radius: 5px;
+      background: rgb(230, 230, 230);
+      cursor: pointer;
+    }
+    span {
+      color: #fff;
+      padding: 0 10px;
+    }
+  }
+  &__сontent {
+    padding-top: 40px;
+    width: 90%;
+    margin: 10px auto;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.2s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
