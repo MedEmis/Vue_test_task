@@ -7,10 +7,10 @@
           to="/post-preView"
           >Posts List</router-link
         >
-        <span>post# {{ GET_INFINITE_POSTS.length }}</span>
+        <span>posts: {{ GET_INFINITE_POSTS.length }}</span>
       </header>
       <main class="main-container__сontent">
-        <transition name="fade" mode="out-in">
+        <transition name="bounce" mode="out-in">
           <router-view />
         </transition>
       </main>
@@ -58,7 +58,6 @@ export default {
     position: fixed;
     width: 100%;
     height: 50px;
-    padding: 15px;
     z-index: 15;
     background: $header-bg;
     &_route-link {
@@ -66,6 +65,8 @@ export default {
       text-decoration: none;
       color: #000;
       font-weight: 700;
+      line-height: 50px;
+      margin: 10px;
       border-radius: 5px;
       background: rgb(230, 230, 230);
       cursor: pointer;
@@ -82,15 +83,21 @@ export default {
   }
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition-duration: 0.2s;
-  transition-property: opacity;
-  transition-timing-function: ease;
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
 }
-
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

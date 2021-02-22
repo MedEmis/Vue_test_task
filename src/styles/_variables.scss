@@ -1,10 +1,18 @@
-$header-bg: rgb(12, 7, 87);
+$header-bg: rgb(55, 48, 151);
 $main-bg: rgb(255, 255, 255);
 
-$post-bg: rgb(212, 212, 212);
-$post-title: rgb(36, 36, 36);
-$post-text: rgb(44, 44, 44);
-$post-button-bg: rgb(40, 129, 212);
-$post-button-color: rgb(255, 255, 255);
-$post-padding: 20px;
-$post-font-size: 20px;
+$post: (
+	bg: rgb(212, 212, 212),
+	title: rgb(36, 36, 36),
+	title-bg: rgb(104, 103, 141),
+	text: rgb(44, 44, 44),
+	button-bg: rgb(40, 129, 212),
+	button-color: rgb(255, 255, 255),
+	padding: 15px 15px 35px 15px,
+	margin: 10px,
+	font-size: 20px,
+);
+
+@function post($var) {
+	@return map-get($post, $var);
+}
